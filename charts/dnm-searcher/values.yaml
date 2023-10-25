@@ -1,0 +1,55 @@
+# Default values for detector.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# use to use local images if they exist
+useLocalImage: true
+
+replicaCount: 1
+
+dnmsearcher:
+  image: gcr.io/mission-e/dnm-searcher
+  # image: $SCAN_DOCKER_IMAGE
+  tag: latest
+
+torproxy:
+  name: torproxy
+  image: gcr.io/mission-e/torproxy:latest
+  serviceType: ClusterIP
+  port: 9050
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  limits:
+    cpu: 512m
+    memory: 512Mi
+    ephemeral-storage: 1Gi
+  requests:
+    cpu: 256m
+    memory: 128Mi
+    ephemeral-storage: 120Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

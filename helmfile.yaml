@@ -1,0 +1,25 @@
+context: gitlab-deploy
+
+environments:
+  development:
+  production:
+
+repositories:
+- name: stable
+  url: https://kubernetes-charts.storage.googleapis.com
+- name: coreos
+  url: https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/
+
+releases:
+- name: dnm-searcher
+  namespace: secureworks
+  chart: ./charts/dnm-searcher/
+  set:
+    - name: image
+      value: {{ requiredEnv "IMAGE" }}:{{ requiredEnv "RELEASE_TAG" }}
+    - name: releaseHash
+      value: {{ requiredEnv "CI_COMMIT_SHA" }}
+  values:
+    - ./charts/dnm-searcher/values.yaml
+    - ./deployments/{{  .Environment.Name  }}.yaml
+  wait: true

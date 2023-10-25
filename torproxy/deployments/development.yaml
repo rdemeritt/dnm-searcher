@@ -1,0 +1,9 @@
+image:
+  repo: gcr.io/mission-e/torproxy
+  tag: stable
+
+env:
+  AWS_DEFAULT_REGION: "us-east-2"
+
+torproxy:
+  replicas: 1

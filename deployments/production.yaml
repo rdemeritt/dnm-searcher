@@ -1,0 +1,9 @@
+image:
+  repo: gcr.io/mission-e/dnm-searcher
+  tag: stable
+
+env:
+  AWS_DEFAULT_REGION: "us-east-2"
+
+dnmsearcher:
+  replicas: 1
